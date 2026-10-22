@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="VANTERO.UZ — Old money, classic va sport uslubidagi kiyimlar. Klassik did, zamonaviy ruh.">
+  <title>VANTERO.UZ — Timeless Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #d7bd86;
+      --gold-light: #ead8ac;
+      --gold-dark: #a8864b;
+      --white: #f4f0e7;
+      --muted: #a39c8f;
+      --bg: #080808;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border-subtle: rgba(215, 189, 134, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      background: var(--bg);
+      color: var(--white);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle grain texture overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .10;
+      background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+      z-index: 0;
+    }
+
+    /* Ambient glow */
+    .glow {
+      position: fixed;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #a77c36 0%, transparent 70%);
+      filter: blur(120px);
+      opacity: .10;
+      pointer-events: none;
+      top: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .glow-bottom {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #a77c36 0%, transparent 70%);
+      filter: blur(140px);
+      opacity: .06;
+      pointer-events: none;
+      bottom: 5%;
+      left: 30%;
+      z-index: 0;
+    }
+
+    /* Main container */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    /* Top label */
+    .top-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 4.5px;
+      text-transform: uppercase;
+      animation: fadeUp .8s both;
+    }
+
+    .top-label::before,
+    .top-label::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .5;
+    }
+
+    /* Emblem circle */
+    .emblem {
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(215, 189, 134, .35);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 32px 0 20px;
+      position: relative;
+      box-shadow:
+        0 0 60px rgba(215, 189, 134, .06),
+        inset 0 0 30px rgba(215, 189, 134, .04);
+      animation: fadeUp 1s .1s both;
+    }
+
+    .emblem::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(215, 189, 134, .18);
+      border-radius: 50%;
+    }
+
+    /* Rotating ring animation */
+    .emblem::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      border-top-color: var(--gold);
+      opacity: .25;
+      animation: spinSlow 8s linear infinite;
+    }
+
+    .monogram {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 82px;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--gold);
+      text-shadow: 0 0 32px rgba(215, 189, 134, .14);
+    }
+
+    /* Brand name */
+    .brand {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(38px, 10vw, 72px);
+      font-weight: 500;
+      letter-spacing: 8px;
+      padding-left: 8px;
+      line-height: 1.1;
+      background: linear-gradient(110deg, #a8864b, #fff0c9, #b18b4b, #fff0c9, #a8864b);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeUp .9s .2s both, shimmer 6s ease-in-out infinite;
+    }
+
+    /* Tagline */
+    .tagline {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 3.5px;
+      line-height: 2;
+      text-transform: uppercase;
+      animation: fadeUp .9s .3s both;
+    }
+
+    /* Divider */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .5;
+      margin: 26px 0;
+      animation: fadeUp .9s .35s both;
+    }
+
+    /* Description */
+    .description {
+      max-width: 340px;
+      width: 100%;
+      color: #d1cbc0;
+      font-size: 14px;
+      line-height: 1.9;
+      animation: fadeUp .9s .4s both;
+    }
+
+    /* Category badges */
+    .categories {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      animation: fadeUp .9s .5s both;
+    }
+
+    .categories span {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 16px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      background: var(--bg-card);
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 2px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: border-color .3s, background .3s, transform .3s;
+    }
+
+    .categories span:hover {
+      border-color: rgba(215, 189, 134, .4);
+      background: rgba(215, 189, 134, .06);
+      transform: translateY(-2px);
+    }
+
+    /* CTA Button */
+    .contact {
+      margin-top: 32px;
+      width: min(100%, 320px);
+      min-height: 56px;
+      padding: 0 24px;
+      border: none;
+      border-radius: 4px;
+      background: linear-gradient(110deg, #b18c50, #ead8ac, #b18c50);
+      background-size: 200% 100%;
+      color: #15120c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s;
+      animation: fadeUp .9s .6s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.25) 50%, transparent 70%);
+      background-size: 200% 100%;
+      animation: btnShimmer 4s ease-in-out infinite;
+    }
+
+    .contact:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(215, 189, 134, .22);
+    }
+
+    .contact:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .contact svg {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hint text */
+    .hint {
+      margin-top: 14px;
+      color: #777168;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      animation: fadeUp .9s .7s both;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 20px 24px;
+      color: #555049;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+    }
+
+    footer .footer-line {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(215,189,134,.2), transparent);
+      margin: 0 auto 14px;
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    @keyframes btnShimmer {
+      0%, 100% { background-position: -200% 0; }
+      50%      { background-position: 200% 0; }
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ========== RESPONSIVE — All phones ========== */
+
+    /* Very small phones: Galaxy Fold, small screens (280px–359px) */
+    @media (max-width: 359px) {
+      .page { padding: 28px 16px; }
+      .emblem { width: 100px; height: 100px; margin: 20px 0 14px; }
+      .monogram { font-size: 52px; }
+      .brand { font-size: 30px; letter-spacing: 5px; padding-left: 5px; }
+      .tagline { font-size: 8px; letter-spacing: 2.5px; }
+      .description { font-size: 12px; line-height: 1.8; }
+      .categories span { padding: 5px 12px; font-size: 8px; letter-spacing: 1.5px; }
+      .categories { gap: 6px; }
+      .contact { min-height: 48px; font-size: 10px; padding: 0 16px; }
+      .top-label { font-size: 8px; letter-spacing: 3px; gap: 8px; }
+      .top-label::before, .top-label::after { width: 20px; }
+      .divider { margin: 18px 0; }
+    }
+
+    /* Small phones: iPhone SE, older Androids (360px–389px) */
+    @media (min-width: 360px) and (max-width: 389px) {
+      .page { padding: 30px 20px; }
+      .emblem { width: 115px; height: 115px; margin: 24px 0 16px; }
+      .monogram { font-size: 60px; }
+      .brand { font-size: 34px; letter-spacing: 6px; }
+      .description { font-size: 13px; }
+      .contact { min-height: 50px; font-size: 11px; }
+    }
+
+    /* Medium phones: iPhone 12/13/14, Pixel, Galaxy S (390px–430px) */
+    @media (min-width: 390px) and (max-width: 430px) {
+      .page { padding: 36px 24px; }
+      .emblem { width: 130px; height: 130px; }
+      .monogram { font-size: 72px; }
+    }
+
+    /* Large phones / phablets: iPhone Pro Max, Galaxy Ultra (431px–480px) */
+    @media (min-width: 431px) and (max-width: 480px) {
+      .page { padding: 40px 28px; }
+      .emblem { width: 145px; height: 145px; }
+      .monogram { font-size: 80px; }
+      .description { max-width: 380px; font-size: 15px; }
+      .contact { width: min(100%, 350px); }
+    }
+
+    /* Small tablets / landscape phones (481px–767px) */
+    @media (min-width: 481px) and (max-width: 767px) {
+      .page { padding: 48px 32px; }
+      .emblem { width: 155px; height: 155px; }
+      .monogram { font-size: 88px; }
+      .description { max-width: 420px; font-size: 15px; }
+      .contact { width: min(100%, 360px); min-height: 58px; font-size: 13px; }
+      .categories span { padding: 8px 20px; font-size: 10px; }
+    }
+
+    /* Tablets and desktop (768px+) */
+    @media (min-width: 768px) {
+      .page { padding: 60px 40px; }
+      .emblem { width: 160px; height: 160px; margin: 38px 0 24px; }
+      .monogram { font-size: 94px; }
+      .description { max-width: 440px; font-size: 16px; }
+      .contact { width: 340px; min-height: 60px; font-size: 13px; }
+      .categories span { padding: 8px 22px; font-size: 10px; letter-spacing: 2.5px; }
+      .top-label { font-size: 11px; letter-spacing: 5px; }
+      .top-label::before, .top-label::after { width: 40px; }
+    }
+
+    /* Short screens — prevent overflow */
+    @media (max-height: 680px) {
+      .page { padding-top: 18px; padding-bottom: 20px; justify-content: flex-start; }
+      .emblem { width: 90px; height: 90px; margin: 16px 0 12px; }
+      .monogram { font-size: 48px; }
+      .divider { margin: 14px 0; }
+      .categories { margin-top: 16px; }
+      .contact { margin-top: 22px; }
+      .brand { font-size: clamp(30px, 9vw, 52px); }
+    }
+
+    /* Landscape orientation on phones */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .page {
+        min-height: auto;
+        padding: 16px 24px;
+        justify-content: flex-start;
+      }
+      .emblem { width: 70px; height: 70px; margin: 10px 0 8px; }
+      .monogram { font-size: 38px; }
+      .brand { font-size: clamp(26px, 6vw, 40px); letter-spacing: 5px; }
+      .tagline { margin-top: 6px; }
+      .divider { margin: 10px 0; }
+      .description { font-size: 12px; line-height: 1.7; }
+      .categories { margin-top: 12px; }
+      .contact { margin-top: 16px; min-height: 44px; }
+      .hint { margin-top: 8px; }
+    }
+
+    /* Accessibility — reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="glow-bottom"></div>
+
+  <main class="page">
+    <div class="top-label">EST. 2026 · YOUR STYLE</div>
+
+    <div class="emblem">
+      <span class="monogram">V</span>
+    </div>
+
+    <h1 class="brand">VANTERO</h1>
+    <p class="tagline">TIMELESS STYLE. MODERN CLASS.</p>
+
+    <div class="divider"></div>
+
+    <p class="description">
+      Klassik did, zamonaviy ruh.<br>
+      Old money, elegant va sport uslubidagi kiyimlar
+      uchun biz bilan bog'laning.
+    </p>
+
+    <div class="categories">
+      <span>OLD MONEY</span>
+      <span>CLASSIC</span>
+      <span>SPORT</span>
+    </div>
+
+    <!-- TELEGRAM USERNAME'INGNI PASTDAGI HAVOLAGA YOZ -->
+    <a
+      class="contact"
+      href="https://t.me/VANTEROUZ"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M21.8 3.2 18.5 20c-.25 1.18-.9 1.47-1.83.91l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15 9.38-8.47c.41-.36-.09-.56-.64-.2L5.66 13.47.65 11.9c-1.09-.34-1.1-1.09.23-1.62L20.47 2.7c.9-.33 1.69.22 1.33.5Z"/>
+      </svg>
+      <span>TELEGRAM ORQALI MUROJAAT</span>
+    </a>
+
+    <p class="hint">Savollar va buyurtmalar uchun</p>
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    © 2026 VANTERO.UZ · ALL RIGHTS RESERVED
+  </footer>
+</body>
+</html>
